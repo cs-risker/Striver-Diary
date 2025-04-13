@@ -178,6 +178,6 @@ c语言[^1]
 ![不显示的文字](图片路径 "图片标题")
 ```
 
-<img src="../images/building.jpg" alt="this is a picture" style="zoom:33%;" />
+![](images/building.jpg)
 
 # 十、数学公式
