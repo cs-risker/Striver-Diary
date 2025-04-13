@@ -21,6 +21,8 @@
 
 ## 代码
 
+C++
+
 ```cpp
 class Solution {
 public:
