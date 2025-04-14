@@ -1,0 +1,25 @@
+class Solution {
+public:
+    bool isValid(string s) {
+        stack<char> st;
+        
+        for(char cur: s){
+            if(cur == '(' || cur == '[' || cur == '{') {
+                st.push(cur);
+            } else {
+                if(st.empty()) {
+                    return false;
+                }
+                char temp = st.top();
+                st.pop();
+                if((temp == '(' && cur != ')') || (temp =='[' && cur != ']') || (temp == '{' && cur != '}')){
+                    return false;
+                }
+            }
+        }
+        if(!st.empty()){
+            return false;
+        }
+        return true;
+    }
+};
