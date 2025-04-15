@@ -1,0 +1,66 @@
+class Solution {
+public:
+    int evalRPN(vector<string>& tokens) {
+        stack<int> data;
+
+        for(string cur: tokens) {
+            if(cur == "+") {
+                int a,b;
+                if(!data.empty()){
+                    a = data.top();
+                    data.pop();
+                }
+                if(!data.empty()) {
+                    b = data.top();
+                    data.pop();
+                }
+                data.push(a+b);
+
+            }else if(cur == "-") {
+                int a,b;
+                if(!data.empty()){
+                    a = data.top();
+                    data.pop();
+                }
+                if(!data.empty()) {
+                    b = data.top();
+                    data.pop();
+                }
+                data.push(b - a);
+                
+            }else if(cur == "*") {
+                int a,b;
+                if(!data.empty()){
+                    a = data.top();
+                    data.pop();
+                }
+                if(!data.empty()) {
+                    b = data.top();
+                    data.pop();
+                }
+                data.push(a*b);
+                
+            }else if(cur == "/") {
+                int a,b;
+                if(!data.empty()){
+                    a = data.top();
+                    data.pop();
+                }
+                if(!data.empty()) {
+                    b = data.top();
+                    data.pop();
+                }
+                data.push(b/a);
+
+            }else {
+                int temp = stoi(cur);
+                data.push(temp);
+            }
+        }
+        if(!data.empty()){
+            return data.top();
+        }else{
+            return -1;
+        }
+    }
+};
