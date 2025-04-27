@@ -2,7 +2,7 @@
 
 ## OLED Driver
 
-Learn and port the EspressIf official SSD1306 driver to the RFIDCar project to display the auto/manual mode ("Auto"/"Manual") and the car's current motion status ("Normal"/"Abnormal") on the OLED  (128 * 64)  screen.
+Learn and port the EspressIf official SSD1306 driver to the RFIDCar project to display the auto/manual mode ("Auto"/"Manual") and the car's current motion status ("Normal"/"Abnormal") on the OLED  (128 * 32)  screen.
 
 > Interesting projects:
 >
