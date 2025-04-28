@@ -12,7 +12,7 @@ Learn and port the EspressIf official SSD1306 driver to the RFIDCar project to d
 >
 > https://github.com/isWuXiao/espressif__ssd1306
 >
-> Good reference：
+> Good reference:
 >
 > https://blog.csdn.net/xundh/article/details/132346497
 
