@@ -19,3 +19,11 @@ Learn and port the EspressIf official SSD1306 driver to the RFIDCar project to d
 # April 28
 
 In order to improve the system response speed as well as reduce the CPU burden, two refresh schemes for OLED were tested and compared respectively. The final choice is to use task notification management, which effectively reduces the refresh frequency and avoids unnecessary resource waste. It is planned to further use this scheme to manage the operation of sending and executing UHF RFID commands.
+
+# April 29
+
+I used the difference in rotation pulses between the two wheels to perform a PID operation to compensate for the heading angle. Several attempts were made to no avail, so it was abandoned.
+
+> dwx:
+>
+> 吭哧吭哧6小时，其结果啥也不是😤
