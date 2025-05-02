@@ -1,5 +1,5 @@
-# Java基础学习笔记
-部分参考资料：
+# 黑马Java基础学习笔记
+主要参考资料：
 
 [黑马程序员Java+AI智能辅助编程全套视频教程](https://www.bilibili.com/video/BV1gb42177hm/?spm_id_from=333.337.search-card.all.click&vd_source=5a9892c5685e5b7e1d5cbd33baa8869e)
 
@@ -46,3 +46,8 @@ jdk包含
 * web 包：这个包通常用于存放与 Web 有关的资源，如 JSP 文件、HTML 文件、CSS 样式表、JavaScript 文件等。在开发 Web 应用时，这个包会包含 Web 服务器上的静态资源
 
 ![](images/2.jpg)
+
+## 基础知识
+引用数据类型中类名、变量名建议采用驼峰命名模式，前者首字母大写，后者首字母小写
+
+输入：导包`import java.util.Scanner`，创建对象`Scanner sc = new Scanner(System.in)`，输入：`int age = sc.nextInt()`，输入字符串用:`sc.next()`
