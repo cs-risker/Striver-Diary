@@ -46,8 +46,112 @@ jdk包含
 * web 包：这个包通常用于存放与 Web 有关的资源，如 JSP 文件、HTML 文件、CSS 样式表、JavaScript 文件等。在开发 Web 应用时，这个包会包含 Web 服务器上的静态资源
 
 ![](images/2.jpg)
-
 ## 基础知识
 引用数据类型中类名、变量名建议采用驼峰命名模式，前者首字母大写，后者首字母小写
 
 输入：导包`import java.util.Scanner`，创建对象`Scanner sc = new Scanner(System.in)`，输入：`int age = sc.nextInt()`，输入字符串用:`sc.next()`
+
+导包配置：settings->Auto import->勾选：Add unambiguous imports on the fly和Optimize imports on the fly
+
++符号做运算符还是连接符？例如：`int a = 5; a + 'a' + "123"`结果为"102123"，也就是能算则算，算不了就连接
+
+逻辑运算符有：`& | ! ^ && ||`
+
+**数组初始化**
+```java
+String[] names = {"john", "jack"};
+double[] scores = new double[8];
+String[] names = {
+    {"a", "b", "c"},
+    {"d", "e", "f"}
+};
+int [][] nums = new int[6][6];
+```
+
+## 面向对象
+this是一个变量，可以用在方法中，其值等于当前对象的地址，作用：解决变量名称冲突的问题
+```java
+public class Person {
+    private String name;
+    private int age;
+    public Person(String name, int age) {
+        // 这里的局部变量name和age与成员变量同名
+        // 使用this.name和this.age来访问成员变量
+        this.name = name; 
+        this.age = age; 
+    }
+    public void introduce() {
+        System.out.println("我叫" + name + "，今年" + age + "岁。");
+        // 这里的name和age虽然没写this，但默认就是访问成员变量
+    }
+}
+```
+**封装**：如何隐藏(private有关变量和方法）、如何暴露（可以使用get、set方法进行合理暴露）。自动生成getter、setter？在IDEA中：右键-->generate-->getter and setter
+
+实体类javabean：1.成员变量全部为私有、并提供public修饰的getter/setter方法 2.类中需要提供一个无参数构造器、有参数构造器可选，一般这种类只负责对数据的存储，对数据的操作，可以单独使用其它的类来进行处理
+
+static修饰的变量（静态变量or类变量）在计算机中只有一份、会被类的全部对象共享，建议用类访问而不是实例访问
+```java
+// Counter.java
+public class Counter {
+    // 用static修饰count变量，使其成为静态变量，属于类，被所有对象共享
+    public static int count = 0; 
+
+    public Counter() {
+        // 每次创建Counter对象，count就自增1
+        count++; 
+    }
+}
+// Main.java
+public class Main {
+    public static void main(String[] args) {
+        Counter counter1 = new Counter();
+        Counter counter2 = new Counter();
+        System.out.println("对象创建个数: " + Counter.count); 
+    }
+}
+```
+静态方法：如果一个方法只是为了完成一项功能，而不需要直接访问对象的数据，则定义为静态方法，应用场景：工具类（***Util），可以提高代码复用性，工具类没有创建对象的需求，建议将其构造器进行私有。
+注意事项：1.静态方法中可以直接访问静态成员，不可以直接访问实例成员 2.实例方法中既可以直接访问静态成员，也可以直接访问实例成员 3.实例方法中可以出现this关键字，静态方法中不可以出现this关键字
+```java
+// ArrayUtils.java
+public class ArrayUtils {
+    // 静态方法：判断数组中的元素是否都为偶数
+    public static boolean allEven(int[] arr) {
+        for (int num : arr) {
+            if (num % 2 != 0) {
+                return false;
+            }
+        }
+        return true;
+    }
+}
+// Main.java
+public class Main {
+    public static void main(String[] args) {
+        int[] arr1 = {2, 4, 6, 8};
+        int[] arr2 = {2, 3, 4, 6};
+
+        // 直接使用类名调用静态方法
+        boolean result1 = ArrayUtils.allEven(arr1);
+        boolean result2 = ArrayUtils.allEven(arr2);
+
+        System.out.println("arr1 中的元素是否都为偶数: " + result1);
+        System.out.println("arr2 中的元素是否都为偶数: " + result2);
+    }
+}
+```
+**继承**
+
+![](images/3.jpg)
+权限修饰符：
+
+* private：只能在本类内部访问
+* 缺省：可以在本类内部、同一个包中的其它类中访问
+  ![](images/4.jpg)
+* protected：本类、同一个包中的类、子孙类中
+* public：任意位置
+
+super：可以强制访问父类变量/方法
+
+方法重写：1.方法名称、形参列表必须和被重写方法相同 2.子类重写父类方法时，访问
