@@ -154,4 +154,185 @@ public class Main {
 
 super：可以强制访问父类变量/方法
 
-方法重写：1.方法名称、形参列表必须和被重写方法相同 2.子类重写父类方法时，访问
+方法重写：1.方法名称、形参列表必须和被重写方法相同 2.子类重写父类方法时，访问权限必须大于等于父类该方法的权限  3.私有方法、静态方法不能被重写  4.最好在重写的方法上加上重写校验标志：`@Override`  5.返回值类型相对于被重写的范围更小，或者类型相同。常见的场景有：子类重写Object类的toString方法，以适应对象内容，如下图所示
+![](images/5.jpg)
+
+this(...)可以调用该类的其它构造器，如下图所示
+![](images/6.jpg)
+
+**多态**
+![](images/7.jpg)
+
+多态的好处：1.多态形势下，右边对象是解耦合的，更便于扩展、维护  2.定义方法时，直接使用父类的形参，可以接受一切子类对象，扩展性更强、更便利，如下图
+![](images/8.jpg)
+
+多态下不能调用子类的独有功能，一种思路是强制转换，具体如下图所示
+![](images/9.jpg)
+
+了解--lombok技术
+## 高级面向对象
+final：修饰类-->不能再被继承  修饰方法-->不能被重写  修饰变量-->有且能被赋值一次
+
+final修饰基本类型的变量，变量存储的数据不能改变；final修饰引用类型的变量，变量存储的地址不能被改变
+
+常量：使用static final修饰的成员变量；作用：常用于记录系统的配置信息，一般使用大写英文、单词间用下划线连接；代码可读性更好，在程序编译后，常量会被“宏替换”：出现常量的地方会被全部替换成其记住的字面量，使其性能与直接使用字面量性能相同
+
+**单例设计模式**
+作用：确保某一个类只能创建一个对象
+
+饿汉式实现步骤：1.把类的构造器私有化  2.定义一个类变量记住类的一个对象  3.定义一个类方法，返回对象
+
+懒汉式实现步骤：1.把类的构造器私有化  2.定义一个静态变量用于存储对象  3.提供一个静态方法，保证返回的是同一个对象
+```java
+//饿汉式单例
+public class A {
+    private static A a = new A();
+    
+    private A() {
+        
+    }
+    public static A getObject() {
+        return a;
+    }
+}
+```
+```java
+//懒汉式单例
+public class B {
+    private static B b;
+    private B() {
+        
+    }
+    public staitc B getObject() {
+        if (b == null) {
+            b = new B();
+        }
+        return b;
+    }
+}
+```
+**枚举类**
+特点：1.枚举类的第一行，只能写枚举类的对象名称，用逗号隔开  2.这些名称，本质是常来，且每个常量都记住了枚举类的一个对象，如下图的反编译案例
+![](images/10.jpg)
+
+枚举类都是final类，不能被继承，枚举类都继承java.lang.enum类；枚举类的构造器都是私有的，因此，枚举类对外不可以创建对象；使用枚举类是一种多例设计模式，如果里面只写一个名称，那么就是一种很好的单例设计方法
+
+使用案例
+![](images/11.jpg)
+
+**抽象类**
+```java
+修饰符 abstract class 类名 {
+    修饰符 abstract 返回值类型 方法名称(形参列表);
+}
+public abstract class A {
+    public abstract void test();
+}
+```
+特点：1.抽象类中不一定要有抽象方法，有抽象方法的类必须是抽象类  2.类有的成员：成员变量、方法、构造器、抽象类都可以有  3.抽象类最主要的特点：抽象类不能创建对象，仅作为一种特殊的父类，让子类继承并实现  4.一个类继承抽象类，必须重写完抽象类的全部抽象方法，否则这个类也必须定义成抽象类
+
+抽象类的好处：为了更好地使用多态
+![](images/12.jpg)
+
+**模板方法设计模式**
+提供一个方法作为完成某类功能的模板，模板方法封装了每个实现步骤，但运行子类提供特定步骤的实现
+
+实现：1.定义一个抽象类  2.在里面定义两个方法，一个是模板方法：把共同的实现步骤放里面；另一个是抽象方法：不确定的实现步骤，交给具体的子类实现
+![](images/13.jpg)
+
+**接口**
+jdk8及之前接口只有常量和抽象方法，接口中定义常量可以省略public static final，定义抽象方法可以省略public abstract不写，默认会加上去
+
+实现类写好之后，可以把光标放在红线上面，使用alt+回车+回车全部重写相关全部重写相关类
+
+接口的好处：弥补了类单继承的不足，一个类同时可以实现多个接口，使类的角色更多，功能更强大，同时让程序可以面向接口编程，程序要可以灵活方便地切换各种业务实现，更利于程序的解耦合
+![](images/14.jpg)
+
+接口和抽象类对比：
+* 相同点：
+  * 都是抽象形式，都可以有抽象方法，都不能创建对象
+  * 都是派生子类形式，抽象类是被子类继承使用，接口是被实现类实现
+  * 一个类继承抽象类或者实现接口都必须重写完它们的抽象方法，否则自己成为抽象类或者报错
+  * 都能支持多态、都能实现解耦合
+* 不同点
+  * 抽象类中可以定义类的全部普通成员，接口只能定义常量和抽象方法（jdk8之后新增三种方法）
+  * 抽象类只能被类单继承，接口可以被类多实现
+  * 一个类继承抽象类不能继承其它类，一个类实现了接口还可以继承其它类或者实现其它接口
+  * 抽象类体现模板思想，更利于做父类，实现代码复用性（如：io流）
+  * 接口更适合做功能的解耦合，解耦合性更强更灵活（如：集合）
+
+**代码块**
+静态代码块：static{}类加载时自动执行，只会执行一次，优先加载；作用：完成类的初始化，比如对静态变量的初始化赋值
+
+实例代码块：{}每次创建对象时，执行实例代码块，并在构造器前执行
+
+**内部类**
+成员内部类：就是类中的一个普通成员：
+```java
+public class Outer {
+    public class Inner {
+
+    }
+}
+```
+创建对象的格式：外部类名.内部类名 对象名 = new 外部类(...).new 内部类(...);如`Outer.Inner in = new Outer().new Inner()`
+
+特点：1.成员内部类中可以直接访问外部类的实例成员、静态成员  2.成员内部类的实例方法中，可以直接拿到当前外部类对象，格式是`外部类名.this`，一个例子见下面代码
+```java
+// Outer.java
+class Outer {
+    private int outerValue = 10;
+    
+    class Inner {
+        private int innerValue = 20;
+        
+        public void printValues() {
+            // 获取外部类实例
+            Outer outer = Outer.this;
+            
+            // 访问外部类的私有成员
+            System.out.println("外部类的outerValue: " + outer.outerValue);
+            System.out.println("内部类的innerValue: " + this.innerValue);
+            
+            // 直接通过外部类名.this访问外部成员
+            System.out.println("直接访问外部类的outerValue: " + Outer.this.outerValue);
+        }
+    }
+    
+    public void createInner() {
+        Inner inner = new Inner();
+        inner.printValues();
+    }
+}
+// InnerClassExample.java
+public class InnerClassExample {
+    public static void main(String[] args) {
+        Outer outer = new Outer();
+        outer.createInner();
+    }
+}
+```
+静态内部类
+```java
+public class Outer {
+    public static class Inner {
+
+    }
+}
+```
+创建格式与成员内部类一样，静态内部类可以直接访问外部类的静态成员，不可以直接访问外部类的实例成员
+
+局部内部类：略
+
+匿名内部类：
+![](images/15.jpg)
+
+```java
+//使用comparator接口的匿名内部类实现对数组进行排序
+public class Test {
+    public static void main(String[] args) {
+        Student[] students = new Student[3];
+        students[0] = new Student("name1", 16, 170.1);
+        students[1] = new Student("name2", 18, 180.0);
+        
+```
