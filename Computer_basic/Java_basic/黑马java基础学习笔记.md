@@ -334,5 +334,186 @@ public class Test {
         Student[] students = new Student[3];
         students[0] = new Student("name1", 16, 170.1);
         students[1] = new Student("name2", 18, 180.0);
-        
+        students[2] = new Student("name3", 19, 174.3);
+
+        Arrays.sort(students, new Comparator<Student>() {
+            @Override
+            public int compare(Student o1, Student o2) {
+                return o1.getAge() - o2.getAge();
+            }
+        });
+
+        System.out.println(Arrays.toString(students));
+    }
+}
 ```
+**Lambda**
+使用lambda函数替代某些匿名内部类对象，从而让程序代码更简洁、可读性更好。下面是一个错误示范，lambda并不是可以简化全部的匿名内部类，lambda只能简化函数式接口的匿名内部类
+![](images/16.jpg)
+
+什么是函数式接口：有且仅有一个抽象方法的接口，一个例子如下图所示
+![](images/17.jpg)
+
+用lambda简化函数式接口：comparator
+![](images/18.jpg)
+
+lambda表达式的省略规则：
+* 参数类型可以全部省略不写
+* 如果只有一个参数，参数类型省略的同时"()"也可以省略，但多个参数不能省略"()"
+* 如果lambda表达式中只有一行代码，可以不写大括号，但同时要省略分号";"，如果这行代码是return语句，必须去掉return
+
+**方法引用**
+
+静态方法引用
+![](images/19.jpg)
+
+实例方法引用
+![](images/20.jpg)
+
+特定类型方法引用：`特定类的名称::方法` 使用场景：如果某个lambda表达式只是调用一个特定类型的实例方法，并且前面参数列表中的第一个参数是作为方法主调，后面的所有参数都是作为该实例方法的输入参数，这时可以使用特定类型的方法引用
+![](images/21.jpg)
+
+构造器引用：`类名::new` 如果某个lambda表达式里只是在创建对象，并且"->"前后参数情况一致，就可以使用构造器引用
+![](images/22.jpg)
+
+**String**
+
+创建字符串：方法一：`String name = "123";`  方法二：调用String类的构造器初始化字符串对象
+```java
+public String() //创建一个空白字符串对象，不含有任何内容
+public String(String original) //根据传入的字符串内容，来创建字符串对象
+public String(char[] chars) //根据字符数组的内容，来创建字符串对象
+public String(byte[] bytes) //根据字节数组的内容，来创建字符串对象
+```
+两种创建方式的区别
+```java
+String t1 = "abc";
+String t2 = "abc";
+System.out.printlin(t1 == t2);
+String t3 = new String("abc");
+String t4 = new String("abc");
+System.out.println(t3 == t4);
+```
+String提供的常用方法
+```java
+public int length() //获取字符串的长度并返回（就是字符的个数）
+public char charAt(int index) //获取某个索引位置处的字符返回
+public char[] toCharArray() //将当前字符串转换成字符数组返回
+public boolean equals(Object anObject) //判断当前字符串与另一个字符串的内容是否一样，若一样，返回true
+public boolean equalsIgnoreCase(String anotherString) //判断当前字符串与另一个字符串的内容是否一样（忽略大小写）
+public String substring(int beginIndex, int endIndex) //根据开始和结束索引进行子串截取（左闭右开）
+public String substring(int beginIndex) //从传入的索引处截取，截取到末尾
+public String replace(CharSequence old, CharSequence new) //使用新值取代旧值，返回新的字符串
+public boolean contains(CharSequence s) //判断字符串是否包含某一个字符串
+public boolean startsWith(String prefix) //判断字符串是否以某个字符串内容开头，若是，返回true
+public String[] split(String regex) //把字符串按照某个字符串内容分割，并返回字符串数组回来
+```
+**ArrayList**
+```java
+public ArrayList() //创建一个空的集合对象
+eg：ArrayList<E> objectName = new ArrayList<>();//初始化；E：泛数据类型，只能为引用数据类型
+public boodean add(E e) //将指定的元素添加到此集合的末尾
+public void add(int index, E element) //在此集合中的指定位置插入指定的元素
+public E get(int index) //返回指定索引处的元素
+public int size() //返回集合中的元素的个数
+public E remove(int index) //删除指定索引处的元素，返回被删除的元素
+public boolean remove(Object o) //删除指定的元素，返回删除是否成功
+public E set(int index, E element) //修改指定索引处的元素，返回被修改的元素
+```
+简单例子
+```java
+ArrayList<String> list = new ArrayList<>();
+list.add("java");
+list.add("java2");
+list.add("java3");
+System.out.println(list);//[java, java2, java3]
+System.out.println(list.get(0));
+System.out.println(list.get(1));
+System.out.println(list.get(2));
+```
+如果想往集合里面放入任意数据类型的元素：`ArrayList list = new ArrayList<>()`
+
+**GUI**
+
+java的GUI编程包：
+* AWT（Abstract Window Toolkit）：提供了一组原生的GUI组件，依赖于操作系统的本地窗口系统
+* Swing：基于AWT，提供了更丰富的GUI组件，轻量级组件，不依赖于本地窗口系统
+
+常用的Swing组件
+* JFrame：窗口
+* JPanel：用于组织其他组件的容器
+* JButton：按钮组件
+* JTextField：输入框
+* JTable：表格
+
+例子：
+```java
+public static void main(String[] args) {
+    JFrame frame = new JFrame("Simple GUI");
+    frame.setSize(400, 300);
+    frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    JButton button = new JButton("Click Me");
+    frame.add(button);
+    frame.setVisible(true);
+}
+```
+布局管理器（Layout Manager）它们可以决定组件在容器中的布局方式，避免了手动设置每个组件的位置和大小，从而简化了GUI设计过程
+常见的布局管理器：
+* FlowLayout
+* BorderLayout
+* GridLayout
+* BoxLayout
+
+GUI编程中，事件的处理是通过事件监听器（Event Listener）来完成，常用的事件监听器对象：
+* 点击事件监听器ActionListener
+* 按键事件监听器KeyListener
+* 鼠标行为监听器MouseListener
+* ......
+
+下面是一个使用事件监听器的超级简单例子：
+
+step1.定义事件监听器接口
+```java
+//监听器接口：声明事件发生时的回调方法
+interface MyListener {
+    void onEvent(String message);
+}
+```
+step2.定义事件源（触发事件的类）
+```java
+class Event {
+    private MyListener listener;
+    //注册监听器
+    public void setListener(MyListener listener) {
+        this.listener = listener;
+    }
+    //触发事件的方法
+    public void doSomething() {
+        //模拟事件发生
+        if (listener != null) {
+            listener.onEvent("事件触发了");
+        }
+    }
+}
+```
+step3.使用事件监听器
+```java
+public class Main {
+    public static void main(String[] args) {
+        EventSource source = new EventSource();
+        //注册监听器（使用匿名内部类）
+        source.setListener(new MyListener() {
+            @Override
+            public void onEvent(String message) {
+                System.out.println("收到事件：" + message);
+            }
+        });
+        //触发事件
+        source.doSomething();//输出：收到事件：事件触发了！
+    }
+}
+```
+事件的几种写法：
+* 直接提供实现类，用于创建事件监听对象
+* 直接使用匿名内部类对象，代表事件监听对象
+* 自定义窗口，让窗口对象实现事件接口
