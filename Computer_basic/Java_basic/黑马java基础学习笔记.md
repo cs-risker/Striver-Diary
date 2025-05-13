@@ -517,3 +517,105 @@ public class Main {
 * 直接提供实现类，用于创建事件监听对象
 * 直接使用匿名内部类对象，代表事件监听对象
 * 自定义窗口，让窗口对象实现事件接口
+
+# Java加强
+**异常**
+
+异常代表程序出现的问题，如数组越界、除数为0、读取的文件不存在了
+
+java的异常体系：
+
+顶级父类Java.lang.Throwable
+* Error：代表系统级别的严重错误，Error是给sun公司自己用的，开发人员不用管
+* Exception：代表程序可能出现的问题
+  * RuntimeException：运行时异常，该类及其子类，如索引越界
+  * 编译时异常：编译阶段就会出现提醒的，如日期解析异常
+
+异常的基本处理：
+* 抛出异常throws：在方法上使用throws关键字，可以将方法内部出现的异常抛出去给调用者处理
+* 捕获异常try...catch：直接捕获程序出现的异常
+  ```java
+  try {
+      // 监视可能出现异常的代码
+  } catch (异常类型1 变量) {
+      // 处理异常
+  } catch (异常类型2 变量) {
+      // 处理异常
+  } ...
+  ```
+异常的作用：
+* 用来定位程序的bug
+* 可以作为方法内部的一种特殊返回值，以便通知上层调用者，方法的执行问题，如下面的代码
+  ```java
+  public class ExceptionDemo {
+      public static void main(String[] args) {
+          try {
+              System.out.println(div(10, 0));
+              System.out.println("底层方法执行成功");
+          } catch (Exception e) {
+              e.printStackTrace();
+              System.out.println("底层方法执行失败");
+          }
+      }
+      //除数为0时抛出一个编译时异常，而不是返回-1，因为无法判断这个-1是答案还是错误
+      public static int div(int a, int b) throws Exception {
+          if (b == 0) {
+              throw new Exception("除数不能为0");
+          }
+          int res = a / b;
+          return res;
+      }
+  }
+  ```
+
+自定义异常：java无法为这个世界上全部的问题提供异常类代表，如果企业自己的某种问题想通过异常表示，需要自定义异常类，包含运行时和编译时
+```java
+// 自定义编译时异常（继承Exception）
+class InvalidInputException extends Exception {
+    public InvalidInputException(String message) {
+        super(message);
+    }
+}
+
+// 使用该异常的类
+class Calculator {
+    public static int divide(int a, int b) throws InvalidInputException {
+        if (b == 0) {
+            throw new InvalidInputException("除数不能为零");
+        }
+        return a / b;
+    }
+}
+
+// 主类
+public class Main {
+    public static void main(String[] args) {
+        try {
+            int result = Calculator.divide(10, 0);
+            System.out.println("结果: " + result);
+        } catch (InvalidInputException e) {
+            System.out.println("错误: " + e.getMessage());
+        }
+    }
+}
+```
+自定义运行时，把继承Exception变成RuntimeException，此外在divide中，不用手写throws，因为运行时异常会自动抛出
+
+异常的处理方案
+* 底层异常层层往上抛出，最外层捕获异常，记录下异常信息，并响应给合适用户观看提示（常用）
+* 最外层捕获异常后，尝试重新修复
+  ```java
+  // 循环直到用户输入有效整数
+  while (!validInput) {
+      try {
+          System.out.print("请输入一个整数: ");
+          number = scanner.nextInt();
+          validInput = true; // 输入成功，退出循环
+      } catch (InputMismatchException e) {
+          System.out.println("输入无效！请输入一个整数。");
+          scanner.nextLine(); // 清除错误输入
+      }
+  }
+  ```
+
+  
