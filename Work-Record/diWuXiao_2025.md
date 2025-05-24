@@ -40,6 +40,8 @@ Draw a PCB schematic diagram, do the overall system planning, and strive to comp
 
 # May 24
 
-## Open an embedded practical project -- a samll desktop screen. The whole process of learning and practice from 0 to 1, the goal is to achieve personalized design as another "graduation design" for me.
+## Open an embedded practical project
 
-> 教学视频：https://www.bilibili.com/video/BV1wV4y1G7Vk/?spm_id_from=333.1387.homepage.video_card.click&vd_source=df944b7260e2006a48d19f043b2b102e
+Open an embedded practical project -- a samll desktop screen. The whole process of learning and practice from 0 to 1, the goal is to achieve personalized design as another "graduation design" for me.
+
+> [教学视频](https://www.bilibili.com/video/BV1wV4y1G7Vk/?spm_id_from=333.1387.homepage.video_card.click&vd_source=df944b7260e2006a48d19f043b2b102e)
