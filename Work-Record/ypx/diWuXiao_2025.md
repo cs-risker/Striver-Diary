@@ -40,7 +40,7 @@ Draw a PCB schematic diagram, do the overall system planning, and strive to comp
 
 # May 24
 
-## Open an embedded practical project
+## Start an embedded practical project
 
 Open an embedded practical project -- a samll desktop screen. The whole process of learning and practice from 0 to 1, the goal is to achieve personalized design as another "graduation design" for me.
 
@@ -50,4 +50,4 @@ Open an embedded practical project -- a samll desktop screen. The whole process 
 
 ## Hardware Composition
 
-![hardware composition](Work-Record/ypx/picture/hardware composition.png)
+![hardware composition](https://github.com/cs-risker/Striver-Diary/blob/main/Work-Record/ypx/picture/hardware%20composition.png)
