@@ -59,3 +59,7 @@ Open an embedded practical project -- a samll desktop screen. The whole process 
 ## Project Postponement
 
 After in-depth understanding of the "desktop screen" project, I feel that the project is not highly customizable and the lack of hardware materials at hand leads to the cost exceeding expectations (within 100), so I plan to temporarily strand the project and select the project according to the existing materials at hand.
+
+## Development Environment Deployment 
+
+Deploy the ESP development environment on Mac.
