@@ -21,7 +21,7 @@ jdk包含
 
 注意：1.文件名称必须与代码中的类名称一致 2.建议代码文件名全英文，首字母大写，满足驼峰模式
 
-**java工程结构**
+### java工程结构
 
 1.project、module、package、class的关系
 
@@ -57,7 +57,7 @@ jdk包含
 
 逻辑运算符有：`& | ! ^ && ||`
 
-**数组初始化**
+### 数组初始化
 ```java
 String[] names = {"john", "jack"};
 double[] scores = new double[8];
@@ -86,7 +86,8 @@ public class Person {
     }
 }
 ```
-**封装**：如何隐藏(private有关变量和方法）、如何暴露（可以使用get、set方法进行合理暴露）。自动生成getter、setter？在IDEA中：右键-->generate-->getter and setter
+### 封装
+如何隐藏(private有关变量和方法）、如何暴露（可以使用get、set方法进行合理暴露）。自动生成getter、setter？在IDEA中：右键-->generate-->getter and setter
 
 实体类javabean：1.成员变量全部为私有、并提供public修饰的getter/setter方法 2.类中需要提供一个无参数构造器、有参数构造器可选，一般这种类只负责对数据的存储，对数据的操作，可以单独使用其它的类来进行处理
 
@@ -141,7 +142,7 @@ public class Main {
     }
 }
 ```
-**继承**
+### 继承
 
 ![](images/3.jpg)
 权限修饰符：
@@ -160,7 +161,7 @@ super：可以强制访问父类变量/方法
 this(...)可以调用该类的其它构造器，如下图所示
 ![](images/6.jpg)
 
-**多态**
+### 多态
 ![](images/7.jpg)
 
 多态的好处：1.多态形势下，右边对象是解耦合的，更便于扩展、维护  2.定义方法时，直接使用父类的形参，可以接受一切子类对象，扩展性更强、更便利，如下图
@@ -177,7 +178,7 @@ final修饰基本类型的变量，变量存储的数据不能改变；final修�
 
 常量：使用static final修饰的成员变量；作用：常用于记录系统的配置信息，一般使用大写英文、单词间用下划线连接；代码可读性更好，在程序编译后，常量会被“宏替换”：出现常量的地方会被全部替换成其记住的字面量，使其性能与直接使用字面量性能相同
 
-**单例设计模式**
+### 单例设计模式
 作用：确保某一个类只能创建一个对象
 
 饿汉式实现步骤：1.把类的构造器私有化  2.定义一个类变量记住类的一个对象  3.定义一个类方法，返回对象
@@ -211,7 +212,7 @@ public class B {
     }
 }
 ```
-**枚举类**
+### 枚举类
 特点：1.枚举类的第一行，只能写枚举类的对象名称，用逗号隔开  2.这些名称，本质是常来，且每个常量都记住了枚举类的一个对象，如下图的反编译案例
 ![](images/10.jpg)
 
@@ -220,7 +221,7 @@ public class B {
 使用案例
 ![](images/11.jpg)
 
-**抽象类**
+### 抽象类
 ```java
 修饰符 abstract class 类名 {
     修饰符 abstract 返回值类型 方法名称(形参列表);
@@ -234,13 +235,13 @@ public abstract class A {
 抽象类的好处：为了更好地使用多态
 ![](images/12.jpg)
 
-**模板方法设计模式**
+### 模板方法设计模式
 提供一个方法作为完成某类功能的模板，模板方法封装了每个实现步骤，但运行子类提供特定步骤的实现
 
 实现：1.定义一个抽象类  2.在里面定义两个方法，一个是模板方法：把共同的实现步骤放里面；另一个是抽象方法：不确定的实现步骤，交给具体的子类实现
 ![](images/13.jpg)
 
-**接口**
+### 接口
 jdk8及之前接口只有常量和抽象方法，接口中定义常量可以省略public static final，定义抽象方法可以省略public abstract不写，默认会加上去
 
 实现类写好之后，可以把光标放在红线上面，使用alt+回车+回车全部重写相关全部重写相关类
@@ -261,12 +262,12 @@ jdk8及之前接口只有常量和抽象方法，接口中定义常量可以省�
   * 抽象类体现模板思想，更利于做父类，实现代码复用性（如：io流）
   * 接口更适合做功能的解耦合，解耦合性更强更灵活（如：集合）
 
-**代码块**
+### 代码块
 静态代码块：static{}类加载时自动执行，只会执行一次，优先加载；作用：完成类的初始化，比如对静态变量的初始化赋值
 
 实例代码块：{}每次创建对象时，执行实例代码块，并在构造器前执行
 
-**内部类**
+### 内部类
 成员内部类：就是类中的一个普通成员：
 ```java
 public class Outer {
@@ -347,7 +348,7 @@ public class Test {
     }
 }
 ```
-**Lambda**
+### Lambda
 使用lambda函数替代某些匿名内部类对象，从而让程序代码更简洁、可读性更好。下面是一个错误示范，lambda并不是可以简化全部的匿名内部类，lambda只能简化函数式接口的匿名内部类
 ![](images/16.jpg)
 
@@ -362,7 +363,7 @@ lambda表达式的省略规则：
 * 如果只有一个参数，参数类型省略的同时"()"也可以省略，但多个参数不能省略"()"
 * 如果lambda表达式中只有一行代码，可以不写大括号，但同时要省略分号";"，如果这行代码是return语句，必须去掉return
 
-**方法引用**
+### 方法引用
 
 静态方法引用
 ![](images/19.jpg)
@@ -376,7 +377,7 @@ lambda表达式的省略规则：
 构造器引用：`类名::new` 如果某个lambda表达式里只是在创建对象，并且"->"前后参数情况一致，就可以使用构造器引用
 ![](images/22.jpg)
 
-**String**
+### String
 
 创建字符串：方法一：`String name = "123";`  方法二：调用String类的构造器初始化字符串对象
 ```java
@@ -408,7 +409,7 @@ public boolean contains(CharSequence s) //判断字符串是否包含某一个�
 public boolean startsWith(String prefix) //判断字符串是否以某个字符串内容开头，若是，返回true
 public String[] split(String regex) //把字符串按照某个字符串内容分割，并返回字符串数组回来
 ```
-**ArrayList**
+### ArrayList
 ```java
 public ArrayList() //创建一个空的集合对象
 eg：ArrayList<E> objectName = new ArrayList<>();//初始化；E：泛数据类型，只能为引用数据类型
@@ -433,7 +434,7 @@ System.out.println(list.get(2));
 ```
 如果想往集合里面放入任意数据类型的元素：`ArrayList list = new ArrayList<>()`
 
-**GUI**
+### GUI
 
 java的GUI编程包：
 * AWT（Abstract Window Toolkit）：提供了一组原生的GUI组件，依赖于操作系统的本地窗口系统
@@ -518,8 +519,8 @@ public class Main {
 * 直接使用匿名内部类对象，代表事件监听对象
 * 自定义窗口，让窗口对象实现事件接口
 
-# Java加强
-**异常**
+## Java加强
+### 异常
 
 异常代表程序出现的问题，如数组越界、除数为0、读取的文件不存在了
 
@@ -618,4 +619,270 @@ public class Main {
   }
   ```
 
-  
+### 泛型
+
+定义类、接口、方法时，同时声明了一个或者多个类型变量（如：<E>）这种成为泛型类、泛型接口、泛型方法、它们统称为泛型
+
+```java
+public class ArrayList<E> {
+    ...
+}
+```
+作用：泛型提供了在编译阶段约束所能操作的数据类型，并自动进行检查的能力，这样可以避免强制类型转换以及可能出现的异常
+
+```java
+ArrayList list = new ArrayList();
+list.add("java");
+list.add(123);
+list.add(99.9);
+list.add('a');
+list.add(new Object());
+
+//获取数据
+for (int i = 0; i < list.size(); i ++ ) {
+    Object rs = list.get(i);
+    //不使用泛型的话，在进行转换的时候会出现强制转换异常（比如这里整数转字符串）
+    String s = (String) rs;
+    System.out.println(s);
+}
+```
+
+java是强类型语言，事先要统一类型，比如要统一装字符串，那么：`ArrayList<String> list = new ArrayList<String>();`，这样在编译阶段就只能往里面加入字符串的数据，JDK7之后，后面的"String"不用写，只写一个尖括号即可
+
+泛型的本质：把具体的数据类型作为参数传递给变量
+
+泛型类
+```java
+修饰符 class 类名<类型变量,类型变量,...> {
+
+}
+例如：
+public class ArrayList<E>{
+    ...
+}
+```
+注意：类型变量建议用大写的英文字母，常用的有：E、T、K、V
+实例：
+```java
+public class Box<T> {
+    private T content;
+
+    // 构造方法
+    public Box(T content) {
+        this.content = content;
+    }
+
+    // 获取内容
+    public T getContent() {
+        return content;
+    }
+
+    // 设置内容
+    public void setContent(T content) {
+        this.content = content;
+    }
+
+    public static void main(String[] args) {
+        // 存储整数的盒子
+        Box<Integer> intBox = new Box<>(10);
+        System.out.println("Integer Box Content: " + intBox.getContent());
+
+        // 存储字符串的盒子
+        Box<String> strBox = new Box<>("Hello, Generics!");
+        System.out.println("String Box Content: " + strBox.getContent());
+
+        // 泛型类型检查（编译时）
+        // strBox.setContent(123); // 编译错误：无法将Integer类型传递给String类型的Box
+    }
+}
+```
+举一个泛型的例子，泛型类通过包装一个ArrayList来实现一个MyArrayList
+```java
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Objects;
+import java.util.function.Consumer;
+import java.util.function.Predicate;
+
+public class MyArrayList<E> implements Iterable<E> {
+    private final ArrayList<E> list;
+
+    // 构造方法
+    public MyArrayList() {
+        this.list = new ArrayList<>();
+    }
+
+    public MyArrayList(int initialCapacity) {
+        this.list = new ArrayList<>(initialCapacity);
+    }
+
+    // 添加元素
+    public void add(E element) {
+        list.add(element);
+    }
+
+    public void add(int index, E element) {
+        list.add(index, element);
+    }
+
+    // 获取元素
+    public E get(int index) {
+        return list.get(index);
+    }
+
+    // 删除元素
+    public E remove(int index) {
+        return list.remove(index);
+    }
+
+    public boolean remove(E element) {
+        return list.remove(element);
+    }
+
+    // 批量操作
+    public void forEach(Consumer<? super E> action) {
+        list.forEach(action);
+    }
+
+    public boolean removeIf(Predicate<? super E> filter) {
+        return list.removeIf(filter);
+    }
+
+    // 集合信息
+    public int size() {
+        return list.size();
+    }
+
+    public boolean isEmpty() {
+        return list.isEmpty();
+    }
+
+    // 迭代器
+    @Override
+    public Iterator<E> iterator() {
+        return list.iterator();
+    }
+
+    // 重写 toString
+    @Override
+    public String toString() {
+        return list.toString();
+    }
+
+    // 类型安全示例
+    public static void main(String[] args) {
+        // 创建字符串列表
+        MyArrayList<String> stringList = new MyArrayList<>();
+        stringList.add("Apple");
+        stringList.add("Banana");
+        // stringList.add(123); // 编译错误：无法添加 Integer 到 MyArrayList<String>
+
+        // 创建整数列表
+        MyArrayList<Integer> intList = new MyArrayList<>();
+        intList.add(100);
+        intList.add(200);
+
+        // 使用 forEach 和 Lambda
+        stringList.forEach(item -> System.out.println("Item: " + item));
+
+        // 删除符合条件的元素
+        intList.removeIf(num -> num > 150);
+        System.out.println("After remove: " + intList);
+    }
+}
+```
+泛型接口
+```java
+修饰符 interface 接口名<类型变量,类型变量,...>{
+
+}
+```
+类型变量一般依然用大写英文字母
+举一个例子：
+```java
+// 泛型接口定义（需要创建一个接口文件Container.java）
+interface Container<T> {
+    void add(T item);
+    T get();
+    boolean isEmpty();
+}
+
+// 字符串容器实现（创建一个类文件StringContainer.java）
+class StringContainer implements Container<String> {
+    private String value;
+
+    @Override
+    public void add(String item) {
+        this.value = item;
+    }
+
+    @Override
+    public String get() {
+        return value;
+    }
+
+    @Override
+    public boolean isEmpty() {
+        return value == null;
+    }
+}
+
+// 整数容器实现（创建一个类文件IntegerContainer.java）
+class IntegerContainer implements Container<Integer> {
+    private Integer value;
+
+    @Override
+    public void add(Integer item) {
+        this.value = item;
+    }
+
+    @Override
+    public Integer get() {
+        return value;
+    }
+
+    @Override
+    public boolean isEmpty() {
+        return value == null;
+    }
+}
+
+// 通用容器实现（创建一个类文件GenericContainer.java）
+class GenericContainer<T> implements Container<T> {
+    private T item;
+
+    @Override
+    public void add(T item) {
+        this.item = item;
+    }
+
+    @Override
+    public T get() {
+        return item;
+    }
+
+    @Override
+    public boolean isEmpty() {
+        return item == null;
+    }
+}
+
+// 使用示例（创建一个类文件GenericInterfaceExample.java）
+public class GenericInterfaceExample {
+    public static void main(String[] args) {
+        // 使用特定类型的容器
+        Container<String> stringContainer = new StringContainer();
+        stringContainer.add("Hello");
+        System.out.println("String Container: " + stringContainer.get());
+
+        // 使用通用容器
+        Container<Integer> intContainer = new GenericContainer<>();
+        intContainer.add(123);
+        System.out.println("Integer Container: " + intContainer.get());
+
+        // 类型安全检查
+        // stringContainer.add(123); // 编译错误：无法添加 Integer 到 Container<String>
+    }
+}
+```
