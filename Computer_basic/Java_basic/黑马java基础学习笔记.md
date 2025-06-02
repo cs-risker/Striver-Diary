@@ -886,3 +886,146 @@ public class GenericInterfaceExample {
     }
 }
 ```
+泛型方法
+```java
+修饰符 <类型变量,类型变量,...> 返回值类型 方法名（形参列表）{
+
+}
+public static <T> void test(T t) {
+
+}
+```
+举例子：
+```java
+public class GenericMethodExample {
+    public static <T> T getValue(T input) {
+        return input;
+    }
+
+    public static void main(String[] args) {
+        // 传入整数
+        Integer intValue = getValue(10);
+        System.out.println("整数值: " + intValue);
+
+        // 传入字符串
+        String strValue = getValue("Hello, World!");
+        System.out.println("字符串值: " + strValue);
+
+        // 传入布尔值
+        Boolean boolValue = getValue(true);
+        System.out.println("布尔值: " + boolValue);
+    }
+}
+```
+通配符：就是“？”，可以在使用泛型的时候代表一切类型
+
+泛型的上下限：
+* 泛型上限：`? extends Car` ？能接受的必须是Car或者其子类
+* 泛型下限：`? super Car` ？能接受的必须是Car或者其父类
+```java
+import java.util.ArrayList;
+import java.util.List;
+
+public class GenericMethodWithWildcard {
+    // 泛型方法：将源列表中的元素复制到目标列表
+    public static <T> void copyList(List<? extends T> source, List<? super T> destination) {
+        for (T item : source) {
+            destination.add(item);
+        }
+    }
+
+    public static void main(String[] args) {
+        // 创建一个Integer类型的源列表
+        List<Integer> integerSource = new ArrayList<>();
+        integerSource.add(10);
+        integerSource.add(20);
+        integerSource.add(30);
+
+        // 创建一个Number类型的目标列表（因为Integer是Number的子类）
+        List<Number> numberDestination = new ArrayList<>();
+
+        // 调用泛型方法进行复制
+        copyList(integerSource, numberDestination);
+
+        // 打印目标列表
+        System.out.println("复制后的目标列表: " + numberDestination);
+
+        // 创建一个Number类型的源列表
+        List<Number> numberSource = new ArrayList<>();
+        numberSource.add(1.5);
+        numberSource.add(2.5);
+
+        // 创建一个Object类型的目标列表（因为Number是Object的子类）
+        List<Object> objectDestination = new ArrayList<>();
+
+        // 再次调用泛型方法进行复制
+        copyList(numberSource, objectDestination);
+
+        // 打印目标列表
+        System.out.println("再次复制后的目标列表: " + objectDestination);
+    }
+}
+```
+
+泛型不支持基本数据类型，只能支持对象类型（引用数据类型），为什么？“泛型擦除”：泛型工作在编译阶段，等编译后泛型就没用了，所有泛型在编译后都会被擦除，所有类型会恢复成Object类型，如过支持基本数据类型，下面代码是错误的，因为Object不能接收一个基本数据类型
+```java
+ArrayList<int> list = new ArrayList<>();
+list.add(123);
+```
+包装类：就是把基本类型数据包装成对象的类型
+| 基本数据类型 | 对应的包装类（引用数据类型） |
+|:----:|:----:|
+|byte|Byte| 
+|short|Short|
+|int|Integer|
+|long|Long|
+|char|Character|
+|float|Float|
+|double|Double|
+|boolean|Boolean|
+基本类型的数据包装成对象的方案：
+```
+public Integer(int value):已过时
+public static Integer valueOf(int i)
+```
+自动装箱：基本数据类型可以自动转换为包装类型
+自动拆箱：包装类型可以自动转换为基本数据类型
+```java
+Integer it1 = 10;
+Integer it2 = 10;
+Integer it3 = 200;
+Integer it4 = 200;
+System.out.println(it1 == it2);//true
+System.out.println(it3 == it4);//false
+//解释：默认情况下，Java 缓存了从-128到127之间的所有Integer对象，这些缓存的对象存储在Integer类内部的一个静态数组中（IntegerCache.cache）。当自动装箱的数值在这个范围内时，直接返回缓存的对象，而不是创建新对象
+```
+包装类具备的其它功能
+
+1.可以把基本类型的数据转换为字符串类型
+```java
+public static String toString(double d)
+public String toString()
+//例子如下
+int j = 23;
+String rs1 = Integer.toString(j);
+System.out.println(rs1 + 1);//231
+
+Integer i2 = j;
+String rs2 = i2.toString();
+System.out.println(rs2 + 1);//231
+
+String rs3 = j + "";
+```
+2.把字符串类型转换成基本数据类型
+```java
+public static int parseint(String s)
+public static Integer valueOf(String s)
+//例子如下
+String str = "98";
+int i1 = Integer.parseInt(str);
+System.out.println(i1 + 2);
+
+String str2 = "98.8";
+double d = Double.valueOf(str2);
+System.println(d + 2);
+```
