@@ -1029,3 +1029,74 @@ String str2 = "98.8";
 double d = Double.valueOf(str2);
 System.println(d + 2);
 ```
+### 集合
+集合是一种容器，用来装数据的，类似于数组，但集合的大小可变
+![](images/23.jpg)
+List家族的集合：有序、可重复、有索引
+```java
+//以ArrayList为例
+List<String> list = new ArrayList<>();
+list.add("Java");
+list.add("C++");
+System.out.println(list);
+String rs = list.get(0);
+```
+Set家族的集合：无序、不可重复、无索引
+```java
+Set<String> set = new HashSet<>();
+set.add("1");
+set.add("2");
+set.add("1"):
+```
+Collection是单列集合的祖宗，它规定的方法是全部单列集合都会继承的
+```java
+public boolean add(E e) 把给定的对象添加到当前集合中
+public void clear() 清空集合中所有的元素
+public boolean remove(E e) 把给定的对象在当前集合中删除
+public boolean contains(Object obj) 判断当前集合中是否包含给定对象
+public boolean isEmpty() 判断当前集合是否为空
+public int size() 返回集合中元素的个数
+public Object[] toArray() 把集合中的元素存到数组中
+```
+举一个完整的例子：
+```java
+Collection<String> list = new ArrayList<>();
+// 使用add()方法添加元素
+System.out.println("添加元素到集合:");
+list.add("Java");
+list.add("Python");
+list.add("C++");
+list.add("JavaScript");
+System.out.println("当前集合: " + list);
+
+// 使用size()方法获取集合大小
+System.out.println("\n集合大小: " + list.size());
+
+// 使用contains()方法检查元素是否存在
+System.out.println("\n检查元素是否存在:");
+System.out.println("集合是否包含Java? " + list.contains("Java"));
+System.out.println("集合是否包含Ruby? " + list.contains("Ruby"));
+
+// 使用isEmpty()方法检查集合是否为空
+System.out.println("\n集合是否为空? " + list.isEmpty());
+
+// 使用remove()方法删除元素
+System.out.println("\n删除元素:");
+System.out.println("删除Python: " + list.remove("Python"));
+System.out.println("删除Ruby: " + list.remove("Ruby"));
+System.out.println("删除后的集合: " + list);
+
+// 使用toArray()方法将集合转换为数组
+System.out.println("\n集合转换为数组:");
+Object[] array = list.toArray();
+System.out.print("数组内容: ");
+for (Object element : array) {
+    System.out.print(element + " ");
+}
+
+// 使用clear()方法清空集合
+System.out.println("\n\n清空集合:");
+list.clear();
+System.out.println("清空后的集合: " + list);
+System.out.println("集合是否为空? " + list.isEmpty());
+```
