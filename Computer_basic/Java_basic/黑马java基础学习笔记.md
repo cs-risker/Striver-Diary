@@ -1,7 +1,11 @@
-# 黑马Java基础学习笔记
+# Java基础学习笔记
 主要参考资料：
 
 [黑马程序员Java+AI智能辅助编程全套视频教程](https://www.bilibili.com/video/BV1gb42177hm/?spm_id_from=333.337.search-card.all.click&vd_source=5a9892c5685e5b7e1d5cbd33baa8869e)
+
+## 前情提要
+
+本笔记对于过于基础的语法知识并没有记录
 
 ## Java基础环境配置
 java三大平台：javaSE（标准版）、javaEE（企业版）、javaME（小型版）
@@ -1100,3 +1104,63 @@ list.clear();
 System.out.println("清空后的集合: " + list);
 System.out.println("集合是否为空? " + list.isEmpty());
 ```
+**Collection的遍历**
+
+方法一、迭代器遍历
+迭代器是用来遍历集合的专用方式，在java中迭代器的代表是Iterator
+举例：
+```java
+Collection<String> names = new ArrayList<>();
+names.add("1");
+names.add("2");
+names.add("3");
+Iterator<String> it = names.iterator();
+//基础遍历方法
+//System.out.println(it.next());
+//System.out.println(it.next());
+//System.out.println(it.next());
+//使用while循环来遍历
+//hasNext() 判断当前这个位置有没有数据
+while (it.hasNext()) {
+    String name = it.next();
+    System.out.println(name);
+}
+```
+方法二、for-each遍历
+格式:
+```java
+for (元素数据类型 变量名 ： 数组或集合) {
+
+}
+```
+举例：
+```java
+Collection<String> names = new ArrayList<>();
+names.add("1");
+names.add("2");
+names.add("3");
+for (String name : names) {
+    System.out.println(name);
+}
+```
+方法三、lambda表达式
+需要使用如下方法来完成: `default void forEach(Consumer<? super T> action)`
+举例：
+```java
+Collection<String> names = new ArrayList<>();
+names.add("1");
+names.add("2");
+names.add("3");
+names.forEach(new Consumer<String>() {
+    @Override
+    public void accept(String s) {
+        System.out.println(s);
+    }
+}
+// 由于只有一个参数、一个代码，所以也可以简化成如下代码：
+//name.forEach(s -> System.out.print(s));
+//又可以简化为
+//names.forEach(System.out::println);
+```
+**三种遍历方法的区别**
+
